@@ -1,0 +1,129 @@
+.root {
+    -fx-background-color: #000A17;
+    -fx-font-family: "Inter";
+    -fx-font-size: 13px;
+}
+
+/* Górny pasek z tytułem */
+.header-bar {
+    -fx-background-color: #000A17;
+    -fx-padding: 20 40 20 40;
+}
+
+/* Główna karta z formularzem i tabelą */
+.main-block {
+    -fx-background-color: #000E20;
+    -fx-background-radius: 16;
+    -fx-padding: 30;
+}
+
+/* Menu boczne */
+.button.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 0;
+    -fx-padding: 10 0 10 20;
+}
+
+.button.menu-button.active-button {
+    -fx-background-color: #001227;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-width: Infinity;
+    -fx-max-width: Infinity;
+    -fx-background-radius: 15 0 0 15; /* zaokrąglenie tylko z lewej */
+    -fx-padding: 10 0 10 20;
+}
+
+
+
+/* Przyciski */
+#addButton {
+    -fx-background-color: #D12A1D;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+
+#generateDiagramButton {
+    -fx-background-color: #00214C;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+
+/* Formularz */
+.text-field {
+    -fx-background-color: #000B18;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-color: #001B33;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+
+.label {
+    -fx-text-fill: #D1D5DB;
+    -fx-font-size: 14px;
+}
+
+/* Tabela */
+.table-view {
+    -fx-background-color: #000E1F;
+    -fx-control-inner-background: #000E1F;
+    -fx-table-cell-border-color: #334155;
+    -fx-border-color: #334155;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #000E1F;
+    -fx-border-color: #334155;
+    -fx-border-width: 0 0 1 0; /* dolna linia nagłówka */
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #000E1F;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-border-color: #334155;
+    -fx-border-width: 0 1 0 0; /* pionowa linia między nagłówkami */
+}
+
+.button {
+    -fx-cursor: hand;
+}
+
+.button .image-view {
+    -fx-opacity: 0.85;
+}
+.button:hover .image-view {
+    -fx-opacity: 1.0;
+}
+
+
+
+.table-row-cell {
+    -fx-background-color: #000E1F;
+    -fx-text-fill: white;
+    -fx-border-color: #334155;
+    -fx-border-width: 0 0 1 0; /* tylko dolna linia */
+}
+
+.table-cell {
+    -fx-text-fill: white;
+    -fx-border-color: #334155;
+    -fx-border-width: 0 1 0 0; /* tylko prawa linia */
+    -fx-padding: 6;
+}
+
+
+

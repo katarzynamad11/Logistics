@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1100.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.cpmethod.controllers.CPMController">
+
+    <children>
+        <HBox prefHeight="700" prefWidth="1100" spacing="0" style="-fx-background-color: #000A17;">
+
+            <!-- LEWY PANEL MENU -->
+            <fx:include source="menu-left.fxml" />
+
+            <!-- PRAWA STRONA -->
+            <VBox alignment="TOP_CENTER" prefWidth="900" spacing="20" style="-fx-padding: 30;">
+
+                <!-- NAGŁÓWEK -->
+                <StackPane prefWidth="900" style="-fx-padding: 0 0 30 0;">
+                    <Label text="CPM Method"
+                           style="-fx-font-size: 36px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';"
+                           StackPane.alignment="CENTER" />
+                    <ImageView fx:id="helpIcon"
+                               fitWidth="40" fitHeight="40"
+                               StackPane.alignment="TOP_RIGHT"
+                               style="-fx-cursor: hand;" />
+                </StackPane>
+
+                <!-- FORMULARZ + TABELA -->
+                <HBox alignment="TOP_CENTER" spacing="40" styleClass="main-block">
+
+                    <!-- FORMULARZ -->
+                    <VBox alignment="TOP_LEFT" spacing="20">
+
+
+                        <!-- Event Name -->
+                        <VBox spacing="10">
+                            <Label text="Event Name:" style="-fx-font-size: 14px; -fx-text-fill: white;" />
+                            <TextField fx:id="eventNameField" prefHeight="33.0" prefWidth="203.0" />
+                        </VBox>
+
+                        <!-- Duration -->
+                        <VBox spacing="10">
+                            <Label text="Duration:" style="-fx-font-size: 14px; -fx-text-fill: white;" />
+                            <TextField fx:id="eventDurationField" prefHeight="33.0" prefWidth="203.0" />
+                        </VBox>
+
+                        <!-- Predecessors -->
+                        <VBox spacing="10">
+                            <Label text="Predecessors:" style="-fx-font-size: 14px; -fx-text-fill: white;" />
+                            <TextField fx:id="eventFromField" prefHeight="33.0" prefWidth="203.0" />
+                        </VBox>
+
+                        <!-- Add Button -->
+                        <VBox>
+                            <Label text=" " />
+                            <Button fx:id="addButton" maxWidth="Infinity"
+                                    onAction="#handleAddEvent"
+                                    prefHeight="42.0" prefWidth="150.0" text="Add"
+                                    style="-fx-background-color: #EF4444; -fx-text-fill: white; -fx-font-weight: bold;" />
+                        </VBox>
+                    </VBox>
+
+
+
+                    <!-- TABELA + PRZYCISK -->
+                    <VBox alignment="TOP_CENTER" spacing="20">
+                        <TableView fx:id="eventsTable" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn prefWidth="50" text="No." />
+                                <TableColumn prefWidth="230" text="Event Name" />
+                                <TableColumn prefWidth="140" text="Duration" />
+                                <TableColumn prefWidth="140" text="Predecessors" />
+                            </columns>
+                        </TableView>
+
+                        <Button fx:id="generateDiagramButton"
+                                onAction="#handleGenerateDiagram"
+                                prefHeight="41" prefWidth="560"
+                                text="Solve"
+                                style="-fx-background-color: #0F295C; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.web.WebView?>
+<AnchorPane prefHeight="700.0" prefWidth="1100.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.cpmethod.controllers.DiagramController">
+
+    <children>
+        <HBox prefHeight="700" prefWidth="1100" spacing="0" style="-fx-background-color: #000A17;">
+
+            <!-- Lewy panel -->
+            <fx:include source="menu-left.fxml" />
+
+            <!-- Prawa część -->
+            <VBox alignment="TOP_CENTER" prefWidth="900" spacing="20" style="-fx-padding: 30;">
+
+                <!-- Nagłówek -->
+                <StackPane prefWidth="900" style="-fx-padding: 0 0 20 0;">
+
+                <ImageView fx:id="helpIcon" fitWidth="40" fitHeight="40"
+                               StackPane.alignment="TOP_RIGHT"
+                               style="-fx-cursor: hand;" />
+                </StackPane>
+
+                <WebView fx:id="svgViewer" prefWidth="800.0" prefHeight="600.0"/>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>

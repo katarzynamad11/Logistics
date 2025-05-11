@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.cpmethod.controllers.MenuLeftController"
+      alignment="TOP_CENTER" prefWidth="200" spacing="20"
+      style="-fx-background-color: #000F1F; -fx-padding: 20 0 20 0;"
+      fillWidth="true">
+
+    <ImageView fx:id="logoImageView" fitHeight="100" preserveRatio="true">
+    </ImageView>
+
+    <VBox spacing="10" fillWidth="true">
+        <Button fx:id="menuButton" maxWidth="Infinity" onAction="#handleMenuClick" styleClass="menu-button" text="MENU">
+            <VBox.margin>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="cpmButton" maxWidth="Infinity" onAction="#handleCPMClick" styleClass="menu-button" text="CPM Input">
+            <VBox.margin>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="diagramButton" maxWidth="Infinity" onAction="#handleDiagramClick" styleClass="menu-button" text="Network Diagram">
+            <VBox.margin>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="ganttButton" maxWidth="Infinity" onAction="#handleGanttClick" styleClass="menu-button" text="Gantt Chart">
+            <VBox.margin>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="tableButton" maxWidth="Infinity" onAction="#handleTableClick" styleClass="menu-button" text="Result Table">
+            <VBox.margin>
+                <Insets top="0" right="0" bottom="0" left="15"/>
+            </VBox.margin>
+        </Button>
+    </VBox>
+
+</VBox>

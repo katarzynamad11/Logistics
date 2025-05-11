@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import org.example.cpmethod.ResultData?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1100.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.cpmethod.controllers.TableController"
+            style="-fx-background-color: #000A17;">
+    <children>
+        <HBox spacing="0" prefHeight="700" prefWidth="1100">
+            <!-- Lewy panel -->
+            <fx:include source="menu-left.fxml" />
+
+            <!-- Prawa strona -->
+            <VBox spacing="10" alignment="TOP_CENTER" prefWidth="900" style="-fx-padding: 30;">
+                <!-- Nagłówek -->
+                <StackPane prefWidth="900" style="-fx-padding: 0 0 20 0;">
+
+                <!-- Ikona pomocy ładowana dynamicznie -->
+                    <ImageView fx:id="helpIcon"
+                               fitHeight="40" fitWidth="40"
+                               StackPane.alignment="TOP_RIGHT"
+                               style="-fx-cursor: hand;" />
+
+                </StackPane>
+
+                <!-- Tabela -->
+                <TableView fx:id="resultTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colActivity" text="Activity" />
+                        <TableColumn fx:id="colDuration" text="Duration" />
+                        <TableColumn fx:id="colES" text="ES" />
+                        <TableColumn fx:id="colEF" text="EF" />
+                        <TableColumn fx:id="colLS" text="LS" />
+                        <TableColumn fx:id="colLF" text="LF" />
+                        <TableColumn fx:id="colSlack" text="Float" />
+                        <TableColumn fx:id="colCritical" text="Critical&#10;Activity" />
+
+                    </columns>
+                </TableView>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>
