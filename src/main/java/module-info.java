@@ -7,7 +7,7 @@ module org.example.cpmethod {
     requires java.net.http;
 
     opens org.example.cpmethod.controllers to javafx.fxml;
-    opens org.example.cpmethod to javafx.fxml;
+    opens org.example.cpmethod to javafx.fxml, com.fasterxml.jackson.databind;
 
     exports org.example.cpmethod;
 }

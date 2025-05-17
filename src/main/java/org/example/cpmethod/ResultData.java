@@ -3,17 +3,21 @@ package org.example.cpmethod;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Klasa modelowa do TableView - dostosowana do JavaFX.
+ * Przyjmuje dane z ResultRow i formatuje jako StringProperty do wyświetlania w tabeli.
+ */
 public class ResultData {
     private final StringProperty activity;
     private final StringProperty duration;
-    private final StringProperty es; // Early Start
-    private final StringProperty ef; // Early Finish
-    private final StringProperty ls; // Late Start
-    private final StringProperty lf; // Late Finish
-    private final StringProperty slack; // Rezerwa
-    private final StringProperty isCritical; // Czynność krytyczna
+    private final StringProperty es;
+    private final StringProperty ef;
+    private final StringProperty ls;
+    private final StringProperty lf;
+    private final StringProperty slack;
+    private final StringProperty critical; // Yes / No
 
-    public ResultData(String activity, String duration, String es, String ef, String ls, String lf, String slack, String isCritical) {
+    public ResultData(String activity, String duration, String es, String ef, String ls, String lf, String slack, String critical) {
         this.activity = new SimpleStringProperty(activity);
         this.duration = new SimpleStringProperty(duration);
         this.es = new SimpleStringProperty(es);
@@ -21,10 +25,10 @@ public class ResultData {
         this.ls = new SimpleStringProperty(ls);
         this.lf = new SimpleStringProperty(lf);
         this.slack = new SimpleStringProperty(slack);
-        this.isCritical = new SimpleStringProperty(isCritical);
+        this.critical = new SimpleStringProperty(critical);
     }
 
-    // Gettery
+    // Getters
     public String getActivity() { return activity.get(); }
     public String getDuration() { return duration.get(); }
     public String getEs() { return es.get(); }
@@ -32,9 +36,9 @@ public class ResultData {
     public String getLs() { return ls.get(); }
     public String getLf() { return lf.get(); }
     public String getSlack() { return slack.get(); }
-    public String getIsCritical() { return isCritical.get(); }
+    public String getCritical() { return critical.get(); }
 
-    // Settery
+    // Setters
     public void setActivity(String value) { activity.set(value); }
     public void setDuration(String value) { duration.set(value); }
     public void setEs(String value) { es.set(value); }
@@ -42,9 +46,9 @@ public class ResultData {
     public void setLs(String value) { ls.set(value); }
     public void setLf(String value) { lf.set(value); }
     public void setSlack(String value) { slack.set(value); }
-    public void setIsCritical(String value) { isCritical.set(value); }
+    public void setCritical(String value) { critical.set(value); }
 
-    // Properties do powiązania z TableView
+    // Properties (do powiązania z TableView)
     public StringProperty activityProperty() { return activity; }
     public StringProperty durationProperty() { return duration; }
     public StringProperty esProperty() { return es; }
@@ -52,5 +56,5 @@ public class ResultData {
     public StringProperty lsProperty() { return ls; }
     public StringProperty lfProperty() { return lf; }
     public StringProperty slackProperty() { return slack; }
-    public StringProperty isCriticalProperty() { return isCritical; }
+    public StringProperty criticalProperty() { return critical; }
 }

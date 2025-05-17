@@ -11,7 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import org.example.cpmethod.AppData;
 import org.example.cpmethod.ResultData;
+import org.example.cpmethod.ResultRow;
 
+/**
+ * Controller odpowiedzialny za wyświetlanie wyników z backendu w tabeli.
+ * Wczytuje dane z AppData.backendResponse i mapuje do modelu ResultData (przystosowanego do TableView).
+ */
 public class TableController {
 
     @FXML private TableView<ResultData> resultTable;
@@ -28,41 +33,42 @@ public class TableController {
 
     @FXML
     private void initialize() {
-        resultTable.setEditable(true);
+        resultTable.setEditable(false); // Wyłączam edytowalność - bo backend generuje dane
 
-        // Ustaw kolumny
-        setupColumn(colActivity, "activity");
-        setupColumn(colDuration, "duration");
-        setupColumn(colES, "es");
-        setupColumn(colEF, "ef");
-        setupColumn(colLS, "ls");
-        setupColumn(colLF, "lf");
-        setupColumn(colSlack, "slack");
-        setupColumn(colCritical, "isCritical");
+        // Powiązania kolumn z właściwościami ResultData
+        colActivity.setCellValueFactory(new PropertyValueFactory<>("activity"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        colES.setCellValueFactory(new PropertyValueFactory<>("es"));
+        colEF.setCellValueFactory(new PropertyValueFactory<>("ef"));
+        colLS.setCellValueFactory(new PropertyValueFactory<>("ls"));
+        colLF.setCellValueFactory(new PropertyValueFactory<>("lf"));
+        colSlack.setCellValueFactory(new PropertyValueFactory<>("slack"));
+        colCritical.setCellValueFactory(new PropertyValueFactory<>("critical"));
 
         resultTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Jeśli AppData ma wyniki — pokaż je
+        // Ładuj dane tylko z backendu (z AppData)
         if (AppData.backendResponse != null) {
-            ObservableList<ResultData> converted = FXCollections.observableArrayList();
-
-            for (var r : AppData.backendResponse.getResults()) {
-                converted.add(new ResultData(
-                        r.getTask(),
-                        String.valueOf(r.getDuration()),
-                        String.valueOf(r.getEarliestStart()),
-                        String.valueOf(r.getEarliestFinish()),
-                        String.valueOf(r.getLatestStart()),
-                        String.valueOf(r.getLatestFinish()),
-                        String.valueOf(r.getSlack()),
-                        r.isCritical() ? "Tak" : "Nie"
+            ObservableList<ResultData> tableData = FXCollections.observableArrayList();
+            for (ResultRow row : AppData.backendResponse.getResults()) {
+                tableData.add(new ResultData(
+                        row.getTask(),
+                        String.valueOf(row.getDuration()),
+                        String.valueOf(row.getEarliestStart()),
+                        String.valueOf(row.getEarliestFinish()),
+                        String.valueOf(row.getLatestStart()),
+                        String.valueOf(row.getLatestFinish()),
+                        String.valueOf(row.getSlack()),
+                        row.isCritical() ? "Yes" : "No"
                 ));
             }
-
-            resultTable.setItems(converted);
+            resultTable.setItems(tableData);
         }
 
-        // Ikona pomocy
+        setupHelpIcon();
+    }
+
+    private void setupHelpIcon() {
         try {
             Image image = new Image(getClass().getResource("/org/example/cpmethod/icons/help.jpg").toExternalForm());
             helpIcon.setImage(image);
@@ -71,46 +77,24 @@ public class TableController {
             helpIcon.setPreserveRatio(true);
             helpIcon.setStyle("-fx-cursor: hand;");
             helpIcon.setClip(new Circle(12, 12, 12));
-
             helpIcon.setOnMouseClicked(event -> showLegendDialog());
-
         } catch (Exception e) {
-            System.err.println("Nie można załadować help.jpg: " + e.getMessage());
+            System.err.println("Unable to load help.jpg: " + e.getMessage());
         }
-    }
-
-    private void setupColumn(TableColumn<ResultData, String> column, String property) {
-        column.setCellValueFactory(new PropertyValueFactory<>(property));
-        column.setCellFactory(TextFieldTableCell.forTableColumn());
-        column.setOnEditCommit(event -> {
-            switch (property) {
-                case "activity" -> event.getRowValue().setActivity(event.getNewValue());
-                case "duration" -> event.getRowValue().setDuration(event.getNewValue());
-                case "es" -> event.getRowValue().setEs(event.getNewValue());
-                case "ef" -> event.getRowValue().setEf(event.getNewValue());
-                case "ls" -> event.getRowValue().setLs(event.getNewValue());
-                case "lf" -> event.getRowValue().setLf(event.getNewValue());
-                case "slack" -> event.getRowValue().setSlack(event.getNewValue());
-                case "isCritical" -> event.getRowValue().setIsCritical(event.getNewValue());
-            }
-        });
     }
 
     private void showLegendDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("💡 Tips");
         alert.setHeaderText("Table Field Descriptions:");
-
         alert.setContentText("""
-        • ES – Early Start
-        • EF – Early Finish
-        • LS – Late Start
-        • LF – Late Finish
-        • Float – Time reserve available for an activity
-        • Critical Activity – When Float = 0
-    """);
-
+            • ES – Early Start
+            • EF – Early Finish
+            • LS – Late Start
+            • LF – Late Finish
+            • Float – Time reserve available for an activity
+            • Critical Activity – When Float = 0
+            """);
         alert.showAndWait();
     }
-
 }

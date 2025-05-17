@@ -153,79 +153,76 @@ public class CPMController {
                 tasksMap.put(name, taskDetails);
             }
 
-            //  JSON przygotowanie
+            // Przygotowanie JSON-a
             Map<String, Object> payload = Map.of("tasks", tasksMap);
             ObjectMapper mapper = new ObjectMapper();
-            String jsonBody = mapper.writeValueAsString(payload);  //tutaj tworzymy jsonBody
-            System.out.println("JSON wysyłany do backendu:");
+            String jsonBody = mapper.writeValueAsString(payload);
+            System.out.println("✅ JSON wysyłany do backendu:");
             System.out.println(jsonBody);
-            /*
-            //  Wysyłanie POST
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.febru.dev/api/gantt"))
+
+            // Wysyłka do backendu (POST)
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest postRequest = HttpRequest.newBuilder()
+                    .uri(URI.create("https://webhook.site/8bf0c237-9141-4b5f-b182-30be320665f7"))
                     .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))  // użycie jsonBody
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
 
-            HttpClient client = HttpClient.newHttpClient();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> postResponse = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+            System.out.println("✅ Response from backend (POST):");
+            System.out.println(postResponse.body());
 
-            System.out.println("Odpowiedź z backendu:");
-            System.out.println(response.body());
- */
+            // Pobranie SVG linków (GET)
+            HttpRequest svgsRequest = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:3000/svgs"))
+                    .GET()
+                    .build();
 
-            // Odbiór danych i pakowanie
-            /*
-            JsonNode root = mapper.readTree(response.body());
+            HttpResponse<String> svgsResponse = client.send(svgsRequest, HttpResponse.BodyHandlers.ofString());
+            System.out.println("✅ Received SVG links:");
+            System.out.println(svgsResponse.body());
 
-            String ganttUrl = root.get("svgs").get("gantt").asText();
-            String diagramUrl = root.get("svgs").get("diagram").asText();
+            Map<String, String> svgsMap = mapper.readValue(svgsResponse.body(), Map.class);
 
-            List<ResultRow> results = new ArrayList<>();
-            for (JsonNode r : root.get("results")) {
-                ResultRow result = new ResultRow(
-                        r.get("task").asText(),
-                        r.get("earliestStart").asInt(),
-                        r.get("earliestFinish").asInt(),
-                        r.get("latestStart").asInt(),
-                        r.get("latestFinish").asInt(),
-                        r.get("isCritical").asBoolean()
-                );
-                results.add(result);
-            }
+            // Pobranie wyników do tabeli (GET)
+            HttpRequest resultsRequest = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:3000/results"))
+                    .GET()
+                    .build();
 
-// Spakuj wszystko
-            BackendResponse backendData = new BackendResponse(ganttUrl, diagramUrl, results); */
+            HttpResponse<String> resultsResponse = client.send(resultsRequest, HttpResponse.BodyHandlers.ofString());
+            System.out.println("✅ Received results:");
+            System.out.println(resultsResponse.body());
 
-            String ganttUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6b/Bitmap_VS_SVG.svg"; // testowy SVG
-            String diagramUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6b/Bitmap_VS_SVG.svg";
+            List<ResultRow> resultsList = Arrays.asList(mapper.readValue(resultsResponse.body(), ResultRow[].class));
 
-// Przykładowe wyniki (symulacja 'results')
-            List<ResultRow> results = List.of(
-                    new ResultRow("A", 3, 0, 3, 0, 3, true),
-                    new ResultRow("B", 3, 0, 3, 0, 3, true),
-                    new ResultRow("C", 3, 0, 3, 0, 3, false)
+            // Pakowanie wszystkiego razem do BackendResponse
+            BackendResponse backendData = new BackendResponse(
+                    svgsMap.get("gantt"),
+                    svgsMap.get("diagram"),
+                    resultsList
             );
 
-// Przekazujemy dane do AppData
-            AppData.backendResponse = new BackendResponse(ganttUrl, diagramUrl, results);
-
-
+            AppData.backendResponse = backendData;
 
             // Komunikat dla użytkownika
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("✅ Success");
-            successAlert.setHeaderText("Calculation completed successfully!");
-            successAlert.setContentText("You can now review the results in the diagram, Gantt chart or table.");
+            successAlert.setTitle("✅ Calculation Complete");
+            successAlert.setHeaderText("Data has been successfully sent and fetched from backend!");
+            successAlert.setContentText("You can now view:\n• Diagram\n• Gantt chart\n• Table");
             successAlert.showAndWait();
-
 
         } catch (Exception e) {
             e.printStackTrace();
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("❌ Error");
+            errorAlert.setHeaderText("An error occurred during backend communication.");
+            errorAlert.setContentText("Check if backend is running and try again.");
+            errorAlert.showAndWait();
         }
-
-
     }
+
+
 
 
 
