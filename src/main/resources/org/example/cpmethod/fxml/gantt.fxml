@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.web.WebView?>
+<?import javafx.geometry.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1100.0"
+<AnchorPane prefHeight="900.0" prefWidth="1100.0"
             xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.cpmethod.controllers.GanttController">
 
     <children>
-        <HBox prefHeight="700.0" prefWidth="1100.0" spacing="0" style="-fx-background-color: #000A17;">
-
+        <HBox prefHeight="900.0" prefWidth="1100.0" spacing="0" style="-fx-background-color: #000A17;">
             <!-- Lewa część: menu -->
             <fx:include source="menu-left.fxml"/>
 
             <!-- Prawa część -->
-            <VBox alignment="TOP_CENTER" prefWidth="900.0" spacing="20.0" style="-fx-padding: 30;">
+            <VBox alignment="TOP_CENTER" prefWidth="900.0" spacing="20.0" style="-fx-padding: 30;" >
 
-                <!-- Nagłówek z tytułem i ikoną pomocy -->
-                <StackPane prefWidth="900" style="-fx-padding: 0 0 20 0;">
 
-                <ImageView fx:id="helpIcon" fitHeight="24.0" fitWidth="24.0"
-                               StackPane.alignment="TOP_RIGHT"
-                               style="-fx-cursor: hand;"/>
-                </StackPane>
+                <!-- ASAP -->
+                <VBox spacing="10.0" alignment="TOP_CENTER" >
+                    <Label text="ASAP" style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: bold;" />
+                    <WebView fx:id="asapViewer"
+                             style="-fx-background-color: transparent;"
+                             opacity="0.99"
+                             prefWidth="800.0"
+                             prefHeight="200.0"
+                             minWidth="800.0"
+                             maxWidth="800.0"
+                             minHeight="200.0"
+                             maxHeight="200.0"
+                             VBox.vgrow="NEVER" />
+                </VBox>
+                <Separator orientation="HORIZONTAL" style="-fx-background-color: gray;">
+                    <VBox.margin>
+                        <Insets top="10"/>
+                    </VBox.margin>
+                </Separator>
 
-                <!-- Miejsce na wyświetlenie SVG -->
-                <WebView fx:id="svgViewer" prefWidth="800.0" prefHeight="600.0"/>
+                <!-- ALAP -->
+                <VBox spacing="10.0" alignment="TOP_CENTER">
+                    <Label text="ALAP" style="-fx-text-fill: white; -fx-font-size: 40px; -fx-font-weight: bold;" />
+                    <WebView fx:id="alapViewer"
+                             style="-fx-background-color: #000A17;"
+                             opacity="0.99"
+                             prefWidth="800.0"
+                             prefHeight="200.0"
+                             minWidth="800.0"
+                             maxWidth="800.0"
+                             minHeight="200.0"
+                             maxHeight="200.0"
+                             VBox.vgrow="NEVER" />
+                </VBox>
             </VBox>
         </HBox>
     </children>

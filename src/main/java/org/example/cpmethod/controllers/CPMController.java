@@ -1,5 +1,6 @@
 package org.example.cpmethod.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,7 @@ public class CPMController {
 
     @FXML
     private void initialize() {
+
         eventsTable.setEditable(true); // edytowanie
 
         TableColumn<EventData, String> colLp = (TableColumn<EventData, String>) eventsTable.getColumns().get(0);
@@ -153,17 +155,18 @@ public class CPMController {
                 tasksMap.put(name, taskDetails);
             }
 
-            // Przygotowanie JSON-a
+            // JSON payload
             Map<String, Object> payload = Map.of("tasks", tasksMap);
             ObjectMapper mapper = new ObjectMapper();
             String jsonBody = mapper.writeValueAsString(payload);
             System.out.println("✅ JSON wysyłany do backendu:");
             System.out.println(jsonBody);
 
-            // Wysyłka do backendu (POST)
             HttpClient client = HttpClient.newHttpClient();
+
+            // POST do /CPM/SolutionRequest
             HttpRequest postRequest = HttpRequest.newBuilder()
-                    .uri(URI.create("https://webhook.site/8bf0c237-9141-4b5f-b182-30be320665f7"))
+                    .uri(URI.create("https://cpmethodwebapi.lemonpebble-4008942a.polandcentral.azurecontainerapps.io/CPM/SolutionRequest"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
@@ -172,9 +175,9 @@ public class CPMController {
             System.out.println("✅ Response from backend (POST):");
             System.out.println(postResponse.body());
 
-            // Pobranie SVG linków (GET)
+            // GET /CPM/svgs
             HttpRequest svgsRequest = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:3000/svgs"))
+                    .uri(URI.create("https://cpmethodwebapi.lemonpebble-4008942a.polandcentral.azurecontainerapps.io/CPM/svgs"))
                     .GET()
                     .build();
 
@@ -184,9 +187,9 @@ public class CPMController {
 
             Map<String, String> svgsMap = mapper.readValue(svgsResponse.body(), Map.class);
 
-            // Pobranie wyników do tabeli (GET)
+            // GET /CPM/results
             HttpRequest resultsRequest = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:3000/results"))
+                    .uri(URI.create("https://cpmethodwebapi.lemonpebble-4008942a.polandcentral.azurecontainerapps.io/CPM/results"))
                     .GET()
                     .build();
 
@@ -194,21 +197,20 @@ public class CPMController {
             System.out.println("✅ Received results:");
             System.out.println(resultsResponse.body());
 
-            List<ResultRow> resultsList = Arrays.asList(mapper.readValue(resultsResponse.body(), ResultRow[].class));
+            JsonNode root = mapper.readTree(resultsResponse.body());
+            List<ResultRow> resultsList = Arrays.asList(mapper.treeToValue(root.get("results"), ResultRow[].class));
 
-            // Pakowanie wszystkiego razem do BackendResponse
+            // Pakowanie danych do AppData
             BackendResponse backendData = new BackendResponse(
-                    svgsMap.get("gantt"),
+                    svgsMap.get("asap"),
+                    svgsMap.get("alap"),
                     svgsMap.get("diagram"),
                     resultsList
             );
-
             AppData.backendResponse = backendData;
 
-            // Komunikat dla użytkownika
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("✅ Calculation Complete");
-            successAlert.setHeaderText("Data has been successfully sent and fetched from backend!");
             successAlert.setContentText("You can now view:\n• Diagram\n• Gantt chart\n• Table");
             successAlert.showAndWait();
 
@@ -221,6 +223,7 @@ public class CPMController {
             errorAlert.showAndWait();
         }
     }
+
 
 
 
