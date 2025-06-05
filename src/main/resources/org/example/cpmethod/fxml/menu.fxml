@@ -64,10 +64,10 @@
                                wrapText="true"
                                style="-fx-text-fill: #D1D5DB; -fx-font-size: 13px; -fx-font-style: italic;" />
 
-                        <Button fx:id="brokerButton" disable="true" prefHeight="36" prefWidth="150"
-                                style="-fx-background-color: #1E293B; -fx-background-radius: 10;
-                   -fx-text-fill: #6B7280; -fx-font-weight: bold; -fx-font-size: 14px;"
-                                text="In Development" />
+                        <Button fx:id="brokerButton" prefHeight="36" prefWidth="150"
+                                style="-fx-background-color: #3B82F6; -fx-background-radius: 10;
+                   -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"
+                                text="Run" />
                     </VBox>
 
 

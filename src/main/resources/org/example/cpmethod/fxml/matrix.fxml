@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="700.0" prefWidth="1100.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.cpmethod.controllers.MatrixController">
+
+    <children>
+        <HBox prefHeight="700.0" prefWidth="1100.0" spacing="0" style="-fx-background-color: #000A17;">
+
+            <!-- Lewy panel -->
+            <fx:include source="MedController.fxml" />
+
+            <!-- Prawa część -->
+            <StackPane style="-fx-background-color: #0A0F1C;" HBox.hgrow="ALWAYS">
+
+                <VBox alignment="TOP_CENTER" spacing="30" maxWidth="900" style="-fx-padding: 30;">
+
+                    <!-- Górna belka: Summary i pomoc -->
+                    <HBox alignment="TOP_RIGHT">
+                        <ImageView fx:id="helpIcon"
+                                   fitWidth="24" fitHeight="24"
+                                   style="-fx-cursor: hand;">
+                            <HBox.margin>
+                                <Insets top="0" right="0" bottom="80" left="0"/>
+                            </HBox.margin>
+                        </ImageView>
+                    </HBox>
+
+                    <!-- Macierz + suwak -->
+                    <StackPane>
+                        <VBox spacing="10"
+                              style="-fx-background-color: #111827; -fx-border-color: #5E6C88;
+                     -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 30;">
+                            <GridPane fx:id="matrixGrid" alignment="CENTER" hgap="10" vgap="10" />
+                            <HBox alignment="CENTER" spacing="10">
+                                <Label fx:id="stepLabel" style="-fx-text-fill: white;" text="Step 0" />
+                                <Slider fx:id="stepSlider"
+                                        min="0" max="0" value="0"
+                                        blockIncrement="1"
+                                        majorTickUnit="1"
+                                        minorTickCount="0"
+                                        snapToTicks="true"
+                                        showTickLabels="true"
+                                        showTickMarks="true"
+                                        style="-fx-pref-width: 400;" />
+                            </HBox>
+                        </VBox>
+
+                        <!-- Tytuł na krawędzi ramki -->
+                        <Label text="Matrix Result"
+                               style="-fx-translate-y: -12;
+                      -fx-background-color: #0A0F1C;
+                      -fx-padding: 0 5 0 5;
+                      -fx-text-fill: white;
+                      -fx-font-size: 14px;
+                      -fx-font-weight: bold;"
+                               StackPane.alignment="TOP_LEFT"/>
+                    </StackPane>
+
+                    <!-- Panel wyników -->
+                    <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10;">
+                        <VBox style="-fx-background-color: #0B1224; -fx-padding: 15; -fx-background-radius: 8;">
+                            <Label style="-fx-text-fill: lightgray;" text="💰 Revenue" />
+                            <Label fx:id="incomeLabel" style="-fx-text-fill: white; -fx-font-size: 18px;" />
+                        </VBox>
+
+                        <VBox style="-fx-background-color: #0B1224; -fx-padding: 15; -fx-background-radius: 8;">
+                            <Label style="-fx-text-fill: lightgray;" text="🎁 Purchase Cost" />
+                            <Label fx:id="purchaseCostLabel" style="-fx-text-fill: #FF5252; -fx-font-size: 18px;" />
+                        </VBox>
+
+                        <VBox style="-fx-background-color: #0B1224; -fx-padding: 15; -fx-background-radius: 8;">
+                            <Label style="-fx-text-fill: lightgray;" text="🚚 Transport Cost" />
+                            <Label fx:id="transportCostLabel" style="-fx-text-fill: white; -fx-font-size: 18px;" />
+                        </VBox>
+
+                        <VBox style="-fx-background-color: #0B1224; -fx-padding: 15; -fx-background-radius: 8;">
+                            <Label style="-fx-text-fill: lightgray;" text="🛠 Total Cost" />
+                            <Label fx:id="totalCostLabel" style="-fx-text-fill: #FF5252; -fx-font-size: 18px;" />
+                        </VBox>
+
+                        <VBox style="-fx-background-color: #0B1224; -fx-padding: 15; -fx-background-radius: 8;">
+                            <Label style="-fx-text-fill: lightgray;" text="📈 Profit" />
+                            <Label fx:id="profitLabel" style="-fx-text-fill: #45F27A; -fx-font-size: 18px;" />
+                        </VBox>
+                    </HBox>
+
+                </VBox>
+
+            </StackPane>
+
+        </HBox>
+    </children>
+</AnchorPane>

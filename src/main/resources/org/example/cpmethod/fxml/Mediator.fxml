@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.cpmethod.controllers.MediatorController">
+    <children>
+        <HBox prefHeight="700.0" prefWidth="1100.0" spacing="0" style="-fx-background-color: #000A17;">
+
+            <fx:include source="MedController.fxml" />
+
+            <VBox alignment="TOP_CENTER" prefWidth="900.0" spacing="20" style="-fx-padding: 30;" VBox.vgrow="ALWAYS">
+
+                <StackPane prefWidth="900.0" prefHeight="40.0">
+                    <ImageView fx:id="helpIcon" fitWidth="40" fitHeight="40" StackPane.alignment="TOP_RIGHT" style="-fx-cursor: hand;" />
+                </StackPane>
+
+                <Region prefHeight="60.0" />
+
+                <StackPane alignment="CENTER">
+
+                    <VBox fx:id="formVBox" alignment="CENTER" prefHeight="450" prefWidth="750" spacing="20"
+                          style="-fx-border-color: #5E6C88; -fx-border-width: 2; -fx-border-radius: 8;
+                                 -fx-background-radius: 8; -fx-padding: 30; -fx-background-color: #050A13;">
+                        <VBox.margin>
+                            <Insets top="100" />
+                        </VBox.margin>
+
+                        <GridPane fx:id="dataGrid" alignment="CENTER" hgap="20" vgap="20">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="120" /> <!-- Label (e.g. Supplier, Demand) -->
+                                <!-- Dynamically added customer columns -->
+                                <ColumnConstraints minWidth="80" />
+                                <ColumnConstraints minWidth="80" />
+                                <!-- Add more dynamically as needed -->
+                                <ColumnConstraints minWidth="120" /> <!-- Purchase price or empty if not used -->
+                            </columnConstraints>
+
+                            <!-- Demand row -->
+                            <Label text="Demand" style="-fx-text-fill: black; -fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <TextField fx:id="demand1Field" promptText="Demand" prefWidth="60" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <TextField fx:id="demand2Field" promptText="Demand" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                            <!-- More demand fields dynamically -->
+
+                            <!-- Supplier 1 row -->
+                            <Label text="Supplier 1" style="-fx-text-fill: black;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="c1s1Field" promptText="unit cost" prefWidth="60" styleClass="matrix-cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <TextField fx:id="c2s1Field" promptText="unit cost" prefWidth="60" styleClass="matrix-cell" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                            <TextField fx:id="purchase1Field" promptText="Purchase" prefWidth="60" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                            <!-- Supplier 2 row -->
+                            <Label text="Supplier 2" style="-fx-text-fill: black;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <TextField fx:id="c1s2Field" promptText="unit cost" prefWidth="60" styleClass="matrix-cell" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <TextField fx:id="c2s2Field" promptText="unit cost" prefWidth="60" styleClass="matrix-cell" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                            <TextField fx:id="purchase2Field" promptText="Purchase" prefWidth="60" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                            <!-- Selling price row -->
+                            <Label text="Selling Price" style="-fx-text-fill: black; -fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                            <TextField fx:id="sell1Field" promptText="Sell" prefWidth="60" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <TextField fx:id="sell2Field" promptText="Sell" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        </GridPane>
+                    </VBox>
+
+                    <StackPane fx:id="overlayPane" maxHeight="270" maxWidth="400"
+                               style="-fx-background-color: rgba(10, 15, 28, 0.95);
+                                      -fx-background-radius: 12;
+                                      -fx-border-color: white;
+                                      -fx-border-radius: 12;
+                                      -fx-border-width: 1;">
+                        <VBox alignment="CENTER" spacing="12">
+                            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Mediator Problem" />
+                            <Label style="-fx-text-fill: #CCCCCC; -fx-font-size: 12px;" text="Enter number of suppliers and receivers" />
+                            <GridPane alignment="CENTER" hgap="10" vgap="10">
+                                <columnConstraints>
+                                    <ColumnConstraints halignment="RIGHT" minWidth="80" />
+                                    <ColumnConstraints halignment="LEFT" minWidth="80" />
+                                </columnConstraints>
+                                <Label style="-fx-text-fill: white;" text="Number of suppliers:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="supplierCountField" prefWidth="60" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Label style="-fx-text-fill: white;" text="Number of receivers:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <TextField fx:id="receiverCountField" prefWidth="60" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            </GridPane>
+                            <Region prefHeight="15" />
+                            <Button fx:id="submitInitialBtn" prefHeight="26.0" prefWidth="206.0"
+                                    style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-weight: bold;"
+                                    text="Submit" />
+                        </VBox>
+                    </StackPane>
+
+                </StackPane>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -126,4 +126,68 @@
 }
 
 
+#layoutSlider {
+    -fx-padding: 20 0 0 0;
+}
+
+/* Slider track */
+#layoutSlider .track {
+    -fx-background-color: linear-gradient(to right, #3b82f6, #1e3a8a); /* gradient */
+    -fx-background-radius: 10;
+    -fx-pref-height: 6px;
+}
+
+/* Thumb (suwak) */
+#layoutSlider .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0.5, 0, 1);
+}
+
+/* Hide tick marks and labels */
+#layoutSlider .axis {
+    -fx-tick-labels-visible: false;
+    -fx-tick-mark-length: 0;
+}
+
+#solveButton {
+    -fx-background-color: #3B82F6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+}
+
+
+.uniform-input {
+    -fx-pref-width: 90;
+    -fx-pref-height: 28;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 4 8 4 8;
+    -fx-font-size: 13px;
+}
+
+.matrix-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: #1E2C3C;
+}
+.header-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.solve-button {
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+
+#matrixGrid .label {
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
 

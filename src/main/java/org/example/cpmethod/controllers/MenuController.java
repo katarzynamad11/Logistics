@@ -16,7 +16,8 @@ public class MenuController {
 
     @FXML
     private Button cpmButton;
-
+    @FXML
+    private Button brokerButton;
     @FXML
     private ImageView Metoda_CPM_ImageView;
     @FXML
@@ -26,7 +27,7 @@ public class MenuController {
     @FXML
     public void initialize() {
         cpmButton.setOnAction(this::handleCPM);
-
+        brokerButton.setOnAction(this::handleMediator);
 
         Image Metoda_CPM = new Image(getClass().getResource("/org/example/cpmethod/icons/CP.png").toExternalForm());
         Metoda_CPM_ImageView.setImage(Metoda_CPM);
@@ -61,4 +62,20 @@ public class MenuController {
             e.printStackTrace();
         }
     }
-}
+        private void handleMediator(ActionEvent event){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cpmethod/fxml/Mediator.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root, 1100, 700);
+                scene.getStylesheets().add(getClass().getResource("/org/example/cpmethod/css/style.css").toExternalForm());
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.setTitle("Metoda CPM");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
