@@ -5,7 +5,7 @@
 1. **Critical Path Method (CPM)**
 2. **Mediator Problem (Transport Problem)**
 
-## 🚀 Features
+## Features
 
 ### 1. Critical Path Method (CPM)
 
@@ -25,19 +25,19 @@
   - The result includes the optimal transport plan and a **step-by-step history** of the calculation process.
     
 
-## 📂 Project Structure
+## Project Structure
 
 - `controllers/` – JavaFX controllers for handling UI logic
 - `fxml/` – FXML layouts for the application views
 - `icons/` – Image resources (e.g., logo, help icon)
 
-## ✅ Requirements
+##  Requirements
 
 - JDK 17 or newer
 - Internet connection (for backend communication)
 - JavaFX SDK (if running outside of an IDE)
 
-![Zarys](./zdj/1.png)
+![Zarys](./zdj1/0.png)
 ![Zarys](./zdj1/1.png)
 ![Zarys](./zdj1/diagram.png)
 ![Zarys](./zdj1/gannt.png)
