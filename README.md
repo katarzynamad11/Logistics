@@ -1,51 +1,41 @@
-# Frontend 
+# Logistics – JavaFX Frontend Application
 
-Założyłam, że będzie okno startowe, gdzie będą dwie ściezki do wyboru: Metoda CPM, oraz Zagadnienie Pośrednika(nie działa, póki co XD). 
-Po wejsciu na Metode CPM. Automatycznie wrzuca użytkownika na widok gdzie ma formularz i tabele. 
-Użytkownik może:
-- dodawać dane
-- usuwać dane
-- edytować dane
-- ma też po lewej górnej stronie tipa, jak naciśnie w ikone, z wytłumaczeniem ogólnym.
+**Logistics** is a JavaFX-based desktop frontend that supports decision-making in logistics through two main modules:
 
-Założyłam że użytkownik będzie dodawał, edytował dane, aż uzna że wszystko mu się podoba i klika w przycisk "Solve".
-Przycisk ten:
-- zbiera dane, które użytkownik wpisał do tabeli i przygotowuje do wysłania do backendu w nastepującej postaci:
-```
-{
-  "tasks": {
-    "A": {
-      "duration": 2,
-      "previous": []
-    },
-    "B": {
-      "duration": 3,
-      "previous": ["A"]
-    },
-    "C": {
-      "duration": 5,
-      "previous": ["A"]
-    },
-    "D": {
-      "duration": 4,
-      "previous": ["B", "C"]
-    }
-  }
-}
-```
-- Następnie oczekuje od backendu 2x pliki svg oraz dane do tabeli(ES, EF etc.)
-- Użytkownik dostaje powiadomienie że wszystko poszło pomyślnie i może zacząć analize wyników
+1. **Critical Path Method (CPM)**
+2. **Mediator Problem (Transport Problem)**
 
-Dodałam dla użytkownika ostrzeżenia:
-- nie może podać w duration nic innego niż dane liczbowe
-- musi uzupełnić każde pole, jeśli nie ma poprzednika to użytkownik daje "-"
+## 🚀 Features
 
-Oraz Legendy/Tipy:
-- w scenach Metoda CPM, Diagram, oraz Tabela
+### 1. Critical Path Method (CPM)
 
+- Users input activity data, including predecessor relationships, through a simple form.
+- The application sends the input to the backend and retrieves a computed solution.
+- Results are displayed in:
+  - A Gantt chart
+  - A dependency diagram
+  - A summary table with calculated values
 
+### 2. Mediator Problem (Transport Optimization)
 
-Narazie to działa przykładowych tam danych.
+- Users are prompted to enter the number of **suppliers** and **customers**.
+- Based on this, the application **dynamically generates a matrix input form**.
+- After filling in demand, supply, unit costs, purchase and selling prices:
+  - A solution is computed and displayed in the **"Solution"** tab.
+  - The result includes the optimal transport plan and a **step-by-step history** of the calculation process.
+    
+
+## 📂 Project Structure
+
+- `controllers/` – JavaFX controllers for handling UI logic
+- `fxml/` – FXML layouts for the application views
+- `icons/` – Image resources (e.g., logo, help icon)
+
+## ✅ Requirements
+
+- JDK 17 or newer
+- Internet connection (for backend communication)
+- JavaFX SDK (if running outside of an IDE)
 
 ![Zarys](./zdj/1.png)
 ![Zarys](./zdj/2.png)
@@ -53,3 +43,6 @@ Narazie to działa przykładowych tam danych.
 ![Zarys](./zdj/4.png)
 ![Zarys](./zdj/5.png)
 ![Zarys](./zdj/6.png)
+![Zarys](./zdj/7.png)
+![Zarys](./zdj/8.png)
+![Zarys](./zdj/9.png)
