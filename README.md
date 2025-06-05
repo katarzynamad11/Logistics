@@ -37,7 +37,7 @@
 - Internet connection (for backend communication)
 - JavaFX SDK (if running outside of an IDE)
 
-![Zarys](./zdj1/0.png)
+![Zarys](./zdj1/12.png)
 ![Zarys](./zdj1/1.png)
 ![Zarys](./zdj1/diagram.png)
 ![Zarys](./zdj1/gannt.png)
